@@ -4,6 +4,8 @@ import type {Metadata} from "next";
 import {ReactNode} from "react";
 
 import {cn} from "@/lib/utils";
+import {ThemeProvider} from "@/components/theme-provider";
+import PrimaryColorProvider from "@/components/primary-provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -27,7 +29,16 @@ export default function RootLayout({children}: {children: ReactNode}) {
           fontSans.variable
         )}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <PrimaryColorProvider>
+            <main>{children}</main>
+          </PrimaryColorProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
