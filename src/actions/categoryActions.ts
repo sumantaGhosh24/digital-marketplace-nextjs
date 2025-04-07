@@ -7,7 +7,7 @@ import connectDB from "@/lib/db";
 import {destroyFromCloudinary, uploadToCloudinary} from "@/lib/cloudinary";
 import CategoryModel from "@/models/categoryModel";
 import {dynamicBlurDataUrl} from "@/lib/utils";
-// import ProductModel from "@/models/productModel";
+import ProductModel from "@/models/productModel";
 
 interface FetchCategoriesParams {
   searchString?: string;
@@ -162,9 +162,9 @@ export async function deleteCategory(id: string, publicId: string) {
   try {
     connectDB();
 
-    // const products = await ProductModel.findOne({category: id});
-    // if (products)
-    //   throw new Error("Please delete all product of this category first.");
+    const products = await ProductModel.findOne({category: id});
+    if (products)
+      throw new Error("Please delete all product of this category first.");
 
     await Promise.all([
       CategoryModel.findByIdAndDelete(id),

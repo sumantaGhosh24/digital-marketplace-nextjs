@@ -85,6 +85,11 @@ const Header = ({user}: {user: any}) => {
                                   name: "Manage Categories",
                                   url: "/categories",
                                 },
+                                {
+                                  id: 3,
+                                  name: "Manage Products",
+                                  url: "/products",
+                                },
                               ].map((item) => (
                                 <NavigationMenuItem
                                   key={item.id}

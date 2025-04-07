@@ -35,6 +35,20 @@ export function validFiles(file: any) {
     fileUpload: file,
   };
 }
+export function validAssets(file: any) {
+  if (file.size > 5 * 1024 * 1024) {
+    return {
+      status: "error",
+      message: "Image is too large (required size 5mb).",
+      imgUrl: URL.createObjectURL(file),
+    };
+  }
+  return {
+    status: "success",
+    imgUrl: URL.createObjectURL(file),
+    fileUpload: file,
+  };
+}
 
 const baseURL = process.env.NEXTAUTH_URL;
 

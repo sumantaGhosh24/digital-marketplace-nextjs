@@ -29,6 +29,7 @@ export async function uploadToCloudinary(files: File[]) {
   const multiplePhotosPromise = newFiles.map((file) =>
     cloudinary.v2.uploader.upload(file.filepath, {
       folder: "digital-marketplace",
+      resource_type: "raw",
     })
   );
   const results = await Promise.all(multiplePhotosPromise);

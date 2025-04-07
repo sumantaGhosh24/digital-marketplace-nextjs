@@ -8,12 +8,12 @@ export default async function middleware(req:NextRequest) {
 
   if (
     !session &&
-    (path === "/" || path === "/users" || path === "/profile" || path.startsWith("/categories"))
+    (path === "/" || path === "/users" || path === "/profile" || path.startsWith("/categories") || path.startsWith('/products') || path.startsWith('/product'))
   ) {
     return NextResponse.redirect(new URL("/login", req.url));
   } else if (session && (path === "/login" || path === "/register")) {
     return NextResponse.redirect(new URL("/", req.url));
-  } else if (session && session?.user?.role === "user" && (path === "/users" || path.startsWith('/categories'))) {
+  } else if (session && session?.user?.role === "user" && (path === "/users" || path.startsWith('/categories') || path.startsWith('/products'))) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 }

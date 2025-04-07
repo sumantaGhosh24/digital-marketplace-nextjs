@@ -76,6 +76,9 @@ const Categories = ({
                           height={50}
                           width={50}
                           className="h-12 animate-pulse cursor-pointer"
+                          placeholder="blur"
+                          blurDataURL={cat.image.blurHash}
+                          priority
                         />
                       }
                       title="Category Image"
@@ -87,6 +90,9 @@ const Categories = ({
                           height={250}
                           width={300}
                           className="h-[300px] w-full rounded"
+                          placeholder="blur"
+                          blurDataURL={cat.image.blurHash}
+                          priority
                         />
                       </div>
                     </DialogProvider>
