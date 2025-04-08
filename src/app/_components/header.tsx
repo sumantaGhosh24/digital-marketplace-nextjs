@@ -54,7 +54,13 @@ const Header = ({user}: {user: any}) => {
             <NavigationMenuList className="flex-col gap-2 md:flex-row">
               {user ? (
                 <>
-                  {[{id: 1, name: "Home", url: "/"}].map((item) => (
+                  {[
+                    {id: 1, name: "Home", url: "/"},
+                    {id: 2, name: "Dashboard", url: "/dashboard"},
+                    {id: 3, name: "My Reviews", url: "/reviews/my"},
+                    {id: 4, name: "My Orders", url: "/orders/my"},
+                    {id: 5, name: "Cart", url: "/cart"},
+                  ].map((item) => (
                     <NavigationMenuItem key={item.id}>
                       <Link href={item.url} legacyBehavior passHref>
                         <NavigationMenuLink
@@ -89,6 +95,16 @@ const Header = ({user}: {user: any}) => {
                                   id: 3,
                                   name: "Manage Products",
                                   url: "/products",
+                                },
+                                {
+                                  id: 4,
+                                  name: "Manage Reviews",
+                                  url: "/reviews",
+                                },
+                                {
+                                  id: 5,
+                                  name: "Manage Orders",
+                                  url: "/orders",
                                 },
                               ].map((item) => (
                                 <NavigationMenuItem

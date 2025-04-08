@@ -14,7 +14,7 @@ export async function savePhotosToLocal(files: File[]) {
     file.arrayBuffer().then((data) => {
       const buffer = Buffer.from(data);
       const name = crypto.randomUUID();
-      const ext = file.type.split("/")[1];
+      const ext = file.name.split(".").pop()?.toLowerCase();
       const tempDir = os.tmpdir();
       const uploadDir = path.join(tempDir, `/${name}.${ext}`);
       fs.writeFile(uploadDir, buffer);

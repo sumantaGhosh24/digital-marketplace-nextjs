@@ -51,6 +51,7 @@ const Pagination = ({page, totalPages, urlParamName}: PaginationProps) => {
       </Button>
       {[...Array(totalPages)].fill(0).map((_, i) => (
         <Button
+          key={i}
           onClick={() => handleClick(i + 1)}
           className={`${
             page === i + 1

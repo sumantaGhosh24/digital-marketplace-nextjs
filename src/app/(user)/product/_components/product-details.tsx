@@ -1,17 +1,40 @@
 "use client";
 
+import {useState} from "react";
 import Image from "next/image";
+import toast from "react-hot-toast";
+import {ShoppingCart} from "lucide-react";
 
+import {addCart} from "@/actions/cartActions";
 import {IProduct} from "@/models/productModel";
+import {usePrimaryColor} from "@/components/primary-provider";
+import {Button} from "@/components/ui/button";
 
 interface ProductDetailProps {
   product: IProduct;
 }
 
 const ProductDetail = ({product}: ProductDetailProps) => {
+  const [loading, setLoading] = useState(false);
+
+  const {primaryColor} = usePrimaryColor();
+
+  const addToCart = async () => {
+    setLoading(true);
+    try {
+      await addCart({productId: product._id, path: "/cart"});
+
+      toast.success("Product added to cart!");
+    } catch (error: any) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="my-10 flex w-full items-center justify-center">
-      <div className="container mx-auto space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
+      <div className="w-[95%] space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
         <div className="mb-5">
           <h2 className="text-2xl font-bold capitalize">{product.title}</h2>
           <h3 className="mt-5 text-xl">{product.description}</h3>
@@ -30,8 +53,17 @@ const ProductDetail = ({product}: ProductDetailProps) => {
         </div>
         <h4 className="flex gap-1 items-center">
           <span className="text-xl font-bold">Price:</span>
-          <span className="text-lg line-through">{product.price}</span>
+          <span className="text-lg">{product.price}</span>
         </h4>
+        <Button
+          type="button"
+          disabled={loading}
+          className={`max-w-fit bg-${primaryColor}-700 hover:bg-${primaryColor}-800 disabled:bg-${primaryColor}-300`}
+          onClick={() => addToCart()}
+        >
+          <ShoppingCart />
+          {loading ? "Processing..." : "Add Cart"}
+        </Button>
         <div className="flex gap-5">
           <div className="flex items-center gap-3 rounded border border-primary p-5">
             <Image
