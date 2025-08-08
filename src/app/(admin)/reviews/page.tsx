@@ -17,7 +17,7 @@ export default async function ManageReviewsPage({
 
   const reviews = await getAllReviews({
     pageNumber: Number(page) || 1,
-    pageSize: 10,
+    pageSize: 20,
   });
 
   const user = await getServerUser();

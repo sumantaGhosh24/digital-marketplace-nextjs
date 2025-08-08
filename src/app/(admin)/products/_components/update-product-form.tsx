@@ -160,7 +160,7 @@ const UpdateProductForm = ({product, categories}: UpdateProductFormProps) => {
   return (
     <Form {...form}>
       <form
-        className="flex flex-col justify-start gap-10"
+        className="flex flex-col justify-start gap-5"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <h1 className="mb-5 text-2xl font-bold">Update Product</h1>

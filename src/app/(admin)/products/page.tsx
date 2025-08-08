@@ -21,7 +21,7 @@ const ManageProduct = async ({searchParams}: ManageProductProps) => {
   const products = await getProducts({
     searchString: (query as string) || "",
     pageNumber: Number(page) || 1,
-    pageSize: 5,
+    pageSize: 20,
   });
 
   return (

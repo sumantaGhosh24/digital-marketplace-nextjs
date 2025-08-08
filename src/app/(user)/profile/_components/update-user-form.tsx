@@ -140,7 +140,7 @@ const UpdateUserForm = ({user}: UpdateUserFormProps) => {
       <div className="w-[95%] space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
         <Form {...form}>
           <form
-            className="flex flex-col justify-start gap-4"
+            className="flex flex-col justify-start gap-5"
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
             onSubmit={form.handleSubmit(onSubmit)}

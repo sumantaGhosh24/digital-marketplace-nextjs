@@ -5,7 +5,6 @@ import {useRouter} from "next/navigation";
 import {useForm} from "react-hook-form";
 import toast from "react-hot-toast";
 
-import {RAZORPAY_KEY} from "@/lib/config";
 import {formatFloatingNumber, getSum} from "@/lib/utils";
 import {ICart} from "@/models/cartModel";
 import {Button} from "@/components/ui/button";
@@ -58,7 +57,7 @@ const Checkout = ({cart}: CheckoutProps) => {
       });
       const order = await data.json();
       const options = {
-        key: RAZORPAY_KEY,
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
         name: "Digital Marketplace",
         description: "Digital marketplace.",
         currency: order.order.currency,
@@ -105,7 +104,7 @@ const Checkout = ({cart}: CheckoutProps) => {
     <section className="p-6 shadow-xl rounded-xl w-full">
       <Form {...form}>
         <form
-          className="flex flex-col justify-start gap-10"
+          className="flex flex-col justify-start gap-5"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <h1 className="text-3xl font-bold capitalize">Checkout</h1>
