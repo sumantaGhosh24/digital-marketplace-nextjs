@@ -13,7 +13,9 @@ export default async function CartPage() {
   return (
     <div className="container mx-auto my-20 flex items-start justify-between flex-wrap flex-col md:flex-row gap-5">
       <ManageCart cart={cart} />
-      {cart && cart.products && cart.products.length > 0 && <Checkout cart={cart} />}
+      {cart && cart.products && cart.products.length > 0 && (
+        <Checkout cart={cart} />
+      )}
     </div>
   );
 }

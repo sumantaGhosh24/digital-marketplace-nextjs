@@ -57,7 +57,7 @@ const UserDashboardCharts = ({
   };
 
   return (
-    <div className="container mx-auto bg-white dark:bg-black text-black dark:text-white rounded-md shadow-lg shadow-black dark:shadow-white p-5 my-10">
+    <div className="container mx-auto rounded-md shadow-md dark:shadow-gray-400 p-5 my-10">
       <Bar data={orderSummaryData} options={orderSummaryOptions} />
       <h2>Total Spend: ₹{totalOrderPrice}</h2>
     </div>

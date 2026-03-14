@@ -25,15 +25,15 @@ const OrderDetails = ({order}: OrderDetailProps) => {
   const {primaryColor} = usePrimaryColor();
 
   return (
-    <div className="my-10 flex w-full items-center justify-center">
-      <div className="w-[95%] space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
-        <div className="relative overflow-x-auto mt-10">
-          <h2 className="text-2xl font-bold mb-3">Order Items: </h2>
+    <div className="container mx-auto my-10 space-y-4 rounded-md p-5 shadow-md dark:shadow-gray-400">
+      <div>
+        <h2 className="text-2xl font-bold mb-6">Order Items</h2>
+        <div className="relative overflow-x-auto">
           <Table>
-            <TableCaption>A list of order items.</TableCaption>
+            <TableCaption>Products included in this order.</TableCaption>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">No</TableHead>
+                <TableHead className="w-[80px]">No</TableHead>
                 <TableHead>Product</TableHead>
                 <TableHead>Price</TableHead>
                 <TableHead>Download</TableHead>
@@ -41,49 +41,46 @@ const OrderDetails = ({order}: OrderDetailProps) => {
             </TableHeader>
             <TableBody>
               {order.orderItems.map((product, ind) => (
-                <TableRow key={ind + 1}>
+                <TableRow key={ind}>
                   <TableCell className="font-medium">{ind + 1}</TableCell>
                   <TableCell>
-                    <DialogProvider
-                      trigger={
+                    <div className="flex items-center gap-4">
+                      <DialogProvider
+                        trigger={
+                          <Image
+                            src={product.thumbnail.url}
+                            alt={product.thumbnail.public_id}
+                            height={60}
+                            width={60}
+                            className="rounded-lg cursor-pointer hover:scale-105 transition"
+                            placeholder="blur"
+                            blurDataURL={product.thumbnail.blurHash}
+                          />
+                        }
+                        title="Product Preview"
+                      >
                         <Image
-                          src={product?.thumbnail.url}
-                          alt={product?.thumbnail.public_id}
-                          placeholder="blur"
-                          blurDataURL={product?.thumbnail.blurHash}
-                          priority
-                          height={50}
-                          width={50}
-                          className="h-12 animate-pulse cursor-pointer"
-                        />
-                      }
-                      title="Product Image"
-                    >
-                      <div>
-                        <Image
-                          src={product?.thumbnail.url}
-                          alt={product?.thumbnail.public_id}
-                          placeholder="blur"
-                          blurDataURL={product?.thumbnail.blurHash}
-                          priority
-                          height={200}
+                          src={product.thumbnail.url}
+                          alt={product.thumbnail.public_id}
+                          height={300}
                           width={500}
-                          className="h-[200px] w-full rounded"
+                          className="rounded-lg w-full"
+                          placeholder="blur"
+                          blurDataURL={product.thumbnail.blurHash}
                         />
-                        <p className="text-lg mt-4 capitalize">
-                          {product?.title}
+                        <p className="mt-4 text-lg font-semibold">
+                          {product.title}
                         </p>
-                      </div>
-                    </DialogProvider>
+                      </DialogProvider>
+                      <span className="font-medium">{product.title}</span>
+                    </div>
                   </TableCell>
-                  <TableCell>
-                    {formatFloatingNumber(product?.price as any)}
+                  <TableCell className="font-semibold">
+                    ₹{formatFloatingNumber(product.price as any)}
                   </TableCell>
                   <TableCell>
                     <Button
-                      className={`
-                      max-w-fit bg-${primaryColor}-700 hover:bg-${primaryColor}-800 disabled:bg-${primaryColor}-300
-                    `}
+                      className={`flex items-center gap-2 bg-${primaryColor}-700 hover:bg-${primaryColor}-800`}
                     >
                       <a href={product.asset.url} download>
                         Download
@@ -95,44 +92,53 @@ const OrderDetails = ({order}: OrderDetailProps) => {
             </TableBody>
           </Table>
         </div>
-        <h2 className="text-xl font-bold">
-          Payment Result:{" "}
-          <span className="font-medium text-lg">
-            {order.paymentResult.id} | {order.paymentResult.status} |{" "}
-            {order.paymentResult.razorpay_order_id} |{" "}
-            {order.paymentResult.razorpay_payment_id} |{" "}
-            {order.paymentResult.razorpay_signature}
-          </span>
-        </h2>
-        <h3 className="mt-5 text-xl font-bold">
-          Price: <span className="font-medium text-lg">{order.price}</span>
-        </h3>
-        <div className="flex items-center gap-3 rounded border border-primary p-5 w-fit">
+      </div>
+      <div className="grid md:grid-cols-2 gap-8">
+        <div className="border rounded-lg p-6 space-y-3">
+          <h3 className="text-xl font-bold mb-3">Payment Details</h3>
+          <p>
+            <span className="font-semibold">Payment ID:</span>{" "}
+            {order.paymentResult.id}
+          </p>
+          <p>
+            <span className="font-semibold">Status:</span>{" "}
+            {order.paymentResult.status}
+          </p>
+          <p>
+            <span className="font-semibold">Order ID:</span>{" "}
+            {order.paymentResult.razorpay_order_id}
+          </p>
+          <p>
+            <span className="font-semibold">Payment Ref:</span>{" "}
+            {order.paymentResult.razorpay_payment_id}
+          </p>
+        </div>
+        <div className="border rounded-lg p-6 flex items-center gap-4">
           <Image
             src={order.user.image.url}
             alt={order.user.image.public_id}
-            height={100}
-            width={100}
-            className="rounded"
+            height={70}
+            width={70}
+            className="rounded-full object-cover"
           />
           <div>
-            <h4 className="capitalize">{order.user.name}</h4>
-            <h4>{order.user.email}</h4>
+            <p className="font-semibold text-lg capitalize">
+              {order.user.name}
+            </p>
+            <p className="text-gray-500">{order.user.email}</p>
           </div>
         </div>
-        <div className="flex items-center justify-between">
-          <h3 className="mt-5 text-xl font-bold">
-            Created at:{" "}
-            <span className="font-medium text-lg">
-              {new Date(order.createdAt).toLocaleDateString()}
-            </span>
-          </h3>
-          <h3 className="mt-5 text-xl font-bold">
-            Updated at:{" "}
-            <span className="font-medium text-lg">
-              {new Date(order.updatedAt).toLocaleDateString()}
-            </span>
-          </h3>
+      </div>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between border-t pt-6">
+        <h3 className="text-2xl font-bold">
+          Total Price:
+          <span className={`ml-2 text-${primaryColor}-500`}>
+            ₹{order.price}
+          </span>
+        </h3>
+        <div className="text-sm text-gray-500 space-y-1 mt-4 md:mt-0">
+          <p>Created: {new Date(order.createdAt).toLocaleDateString()}</p>
+          <p>Updated: {new Date(order.updatedAt).toLocaleDateString()}</p>
         </div>
       </div>
     </div>

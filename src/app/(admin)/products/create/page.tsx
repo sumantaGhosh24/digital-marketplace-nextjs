@@ -10,10 +10,8 @@ const CreateProduct = async () => {
   const categories = await getCategories();
 
   return (
-    <div className="my-20 flex min-h-[80vh] container mx-auto items-center justify-center">
-      <div className="w-full space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
-        <CreateProductForm categories={categories} />
-      </div>
+    <div className="container my-10 mx-auto space-y-4 rounded-md p-5 shadow-md dark:shadow-gray-400">
+      <CreateProductForm categories={categories} />
     </div>
   );
 };

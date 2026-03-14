@@ -14,42 +14,64 @@ const UserDetails = ({user}: UserDetailsProps) => {
   const {primaryColor} = usePrimaryColor();
 
   return (
-    <div className="my-10 flex w-full items-center justify-center">
-      <div className="w-[95%] space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
-        <h1 className="mb-5 text-3xl font-bold">Your Details</h1>
-        <div className="mb-5">
-          <h2 className="text-2xl font-bold capitalize">{user.name}</h2>
-          <h3 className="mt-5 text-xl">{user.username}</h3>
-        </div>
+    <div className="my-10 space-y-4 rounded-md p-5 shadow-md dark:shadow-gray-400">
+      <div className="flex flex-col md:flex-row items-center gap-6 border-b pb-6">
         <Image
           src={user.image.url}
           alt={user.image.public_id}
-          height={300}
-          width={500}
-          className="h-[350px] w-full rounded"
+          height={120}
+          width={120}
+          className="rounded-full object-cover border"
         />
-        <h4 className="font-bold">Email: {user.email}</h4>
-        <h4 className="font-bold">Mobile number: {user.mobileNumber}</h4>
-        <h4 className="capitalize font-bold">
-          DOB: {new Date(user.dob).toLocaleDateString()}
-        </h4>
-        <h4 className="capitalize font-bold">Gender: {user.gender}</h4>
-        <h4 className="capitalize font-bold">City: {user.city}</h4>
-        <h4 className="capitalize font-bold">State: {user.state}</h4>
-        <h4 className="capitalize font-bold">Country: {user.country}</h4>
-        <h4 className="capitalize font-bold">Zip: {user.zip}</h4>
-        <h4 className="capitalize font-bold">
-          Addressline: {user.addressline}
-        </h4>
-        <h4 className="font-bold">
-          Created at: {new Date(user.createdAt).toLocaleDateString()}
-        </h4>
-        <h4 className="font-bold">
-          Updated at: {new Date(user.updatedAt).toLocaleDateString()}
-        </h4>
-        {user.role === "admin" && (
-          <Badge className={`bg-${primaryColor}-700 text-white`}>ADMIN</Badge>
-        )}
+        <div className="text-center md:text-left">
+          <h1 className="text-3xl font-bold">{user.name}</h1>
+          <p className="text-gray-500">@{user.username}</p>
+          {user.role === "admin" && (
+            <Badge className={`mt-2 bg-${primaryColor}-700 text-white`}>
+              ADMIN
+            </Badge>
+          )}
+        </div>
+      </div>
+      <div className="grid md:grid-cols-2 gap-6 mt-8">
+        <div className="space-y-3 p-4 rounded-lg border">
+          <h2 className="text-xl font-semibold mb-2">Contact Information</h2>
+          <p>
+            <span className="font-semibold">Email:</span> {user.email}
+          </p>
+          <p>
+            <span className="font-semibold">Mobile:</span> {user.mobileNumber}
+          </p>
+          <p>
+            <span className="font-semibold">DOB:</span>{" "}
+            {new Date(user.dob).toLocaleDateString()}
+          </p>
+          <p className="capitalize">
+            <span className="font-semibold">Gender:</span> {user.gender}
+          </p>
+        </div>
+        <div className="space-y-3 p-4 rounded-lg border">
+          <h2 className="text-xl font-semibold mb-2">Address</h2>
+          <p className="capitalize">
+            <span className="font-semibold">City:</span> {user.city}
+          </p>
+          <p className="capitalize">
+            <span className="font-semibold">State:</span> {user.state}
+          </p>
+          <p className="capitalize">
+            <span className="font-semibold">Country:</span> {user.country}
+          </p>
+          <p>
+            <span className="font-semibold">Zip:</span> {user.zip}
+          </p>
+          <p className="capitalize">
+            <span className="font-semibold">Address:</span> {user.addressline}
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-col md:flex-row justify-between mt-8 text-sm text-gray-500 border-t pt-6">
+        <p>Created: {new Date(user.createdAt).toLocaleDateString()}</p>
+        <p>Updated: {new Date(user.updatedAt).toLocaleDateString()}</p>
       </div>
     </div>
   );

@@ -86,6 +86,7 @@ const Checkout = ({cart}: CheckoutProps) => {
           }
         },
       };
+      // @ts-ignore
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
       paymentObject.on("payment.failed", function () {
@@ -101,26 +102,33 @@ const Checkout = ({cart}: CheckoutProps) => {
   };
 
   return (
-    <section className="p-6 shadow-xl rounded-xl w-full">
+    <section className="p-6 shadow-md rounded-md w-full dark:shadow-gray-400">
       <Form {...form}>
-        <form
-          className="flex flex-col justify-start gap-5"
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
-          <h1 className="text-3xl font-bold capitalize">Checkout</h1>
-          <div className="flex items-center gap-5">
-            <p className="text-lg font-bold">
-              Price:{" "}
-              <span className="font-medium">{calculatePrice().price}</span>
-            </p>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <h1 className="text-3xl font-bold">Checkout</h1>
+          <div className="border rounded-lg p-6 space-y-4">
+            <h2 className="text-xl font-semibold">Order Summary</h2>
+            <div className="flex justify-between text-lg">
+              <span className="font-medium">Subtotal</span>
+              <span>₹{calculatePrice().price}</span>
+            </div>
+            <div className="flex justify-between text-lg">
+              <span className="font-medium">Total</span>
+              <span className={`text-xl font-bold text-${primaryColor}-500`}>
+                ₹{calculatePrice().price}
+              </span>
+            </div>
           </div>
-          <Button
-            type="submit"
-            disabled={loading}
-            className={`max-w-fit bg-${primaryColor}-700 hover:bg-${primaryColor}-800 disabled:bg-${primaryColor}-300`}
-          >
-            {loading ? "Processing..." : "Checkout"}
-          </Button>
+          <div className="flex justify-end">
+            <Button
+              type="submit"
+              disabled={loading}
+              size="lg"
+              className={`flex items-center gap-2 bg-${primaryColor}-700 hover:bg-${primaryColor}-800 disabled:bg-${primaryColor}-300`}
+            >
+              {loading ? "Processing..." : "Proceed to Payment"}
+            </Button>
+          </div>
         </form>
       </Form>
     </section>

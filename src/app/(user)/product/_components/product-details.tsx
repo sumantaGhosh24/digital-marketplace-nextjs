@@ -33,68 +33,76 @@ const ProductDetail = ({product}: ProductDetailProps) => {
   };
 
   return (
-    <div className="my-10 flex w-full items-center justify-center">
-      <div className="w-[95%] space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
-        <div className="mb-5">
-          <h2 className="text-2xl font-bold capitalize">{product.title}</h2>
-          <h3 className="mt-5 text-xl">{product.description}</h3>
-        </div>
-        <div className="mx-auto w-[90%]">
+    <div className="container mx-auto my-10 space-y-4 rounded-md p-5 shadow-md dark:shadow-gray-400">
+      <div className="grid md:grid-cols-2 gap-10">
+        <div className="flex justify-center items-center">
           <Image
             src={product.thumbnail.url}
             alt={product.thumbnail.public_id}
-            height={200}
+            height={400}
             width={500}
-            className="h-[350px] w-full rounded"
+            className="rounded-xl object-cover h-[420px] w-full"
             placeholder="blur"
             blurDataURL={product.thumbnail.blurHash}
             priority
           />
         </div>
-        <h4 className="flex gap-1 items-center">
-          <span className="text-xl font-bold">Price:</span>
-          <span className="text-lg">{product.price}</span>
-        </h4>
-        <Button
-          type="button"
-          disabled={loading}
-          className={`max-w-fit bg-${primaryColor}-700 hover:bg-${primaryColor}-800 disabled:bg-${primaryColor}-300`}
-          onClick={() => addToCart()}
-        >
-          <ShoppingCart />
-          {loading ? "Processing..." : "Add Cart"}
-        </Button>
-        <div className="flex gap-5">
-          <div className="flex items-center gap-3 rounded border border-primary p-5">
-            <Image
-              src={product.owner.image.url}
-              alt={product.owner.image.public_id}
-              height={100}
-              width={100}
-              className="rounded"
-            />
-            <div>
-              <h4 className="mb-2">Owner: </h4>
-              <h4 className="mb-2 capitalize">{product.owner.name}</h4>
-              <h5>{product.owner.email}</h5>
-            </div>
+        <div className="flex flex-col gap-6">
+          <div>
+            <h1 className="text-4xl font-bold mb-3">{product.title}</h1>
+            <p className="text-gray-600 dark:text-gray-300">
+              {product.description}
+            </p>
           </div>
-          <div className="flex items-center gap-3 rounded border border-primary p-5">
-            <Image
-              src={product.category.image.url}
-              alt={product.category.image.public_id}
-              height={100}
-              width={100}
-              className="rounded"
-            />
-            <div>
-              <h4 className="mb-2">Category: </h4>
-              <h4>{product.category.name}</h4>
+          <div className="flex items-center gap-3">
+            <span className={`text-3xl font-bold text-${primaryColor}-500`}>
+              ₹{product.price}
+            </span>
+          </div>
+          <Button
+            type="button"
+            disabled={loading}
+            className={`w-fit flex items-center gap-2 text-white bg-${primaryColor}-700 hover:bg-${primaryColor}-800 disabled:bg-${primaryColor}-300`}
+            onClick={() => addToCart()}
+          >
+            <ShoppingCart size={18} />
+            {loading ? "Adding..." : "Add to Cart"}
+          </Button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            <div className="flex items-center gap-3 border rounded-lg p-4">
+              <Image
+                src={product.owner.image.url}
+                alt={product.owner.image.public_id}
+                height={50}
+                width={50}
+                className="rounded-full object-cover"
+              />
+              <div>
+                <p className="text-sm text-gray-500">Owner</p>
+                <p className="font-semibold capitalize">{product.owner.name}</p>
+                <p className="text-sm text-gray-500">{product.owner.email}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 border rounded-lg p-4">
+              <Image
+                src={product.category.image.url}
+                alt={product.category.image.public_id}
+                height={50}
+                width={50}
+                className="rounded object-cover"
+              />
+              <div>
+                <p className="text-sm text-gray-500">Category</p>
+                <p className="font-semibold">{product.category.name}</p>
+              </div>
             </div>
           </div>
         </div>
-        <h4>Created at: {new Date(product.createdAt).toLocaleDateString()}</h4>
-        <h4>Updated at: {new Date(product.updatedAt).toLocaleDateString()}</h4>
+      </div>
+      <div className="my-10 border-t"></div>
+      <div className="flex justify-between text-sm text-gray-500">
+        <p>Created: {new Date(product.createdAt).toLocaleDateString()}</p>
+        <p>Updated: {new Date(product.updatedAt).toLocaleDateString()}</p>
       </div>
     </div>
   );

@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function RegisterPage() {
   return (
-    <div className="my-20 flex min-h-screen w-full items-center justify-center">
-      <div className="min-w-[60%] space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
+    <div className="my-10 flex min-h-screen w-full items-center justify-center">
+      <div className="min-w-[80%] space-y-4 rounded-md p-5 shadow-md dark:shadow-gray-400">
         <RegisterForm />
         <p className="text-sm">
           Already have an account?{" "}

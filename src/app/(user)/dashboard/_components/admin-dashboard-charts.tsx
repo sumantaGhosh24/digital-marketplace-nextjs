@@ -141,7 +141,7 @@ const AdminDashboardCharts = ({
   };
 
   return (
-    <div className="container mx-auto bg-white dark:bg-black text-black dark:text-white rounded-md shadow-lg shadow-black dark:shadow-white p-5 my-10 space-y-5">
+    <div className="container mx-auto rounded-md shadow-md dark:shadow-gray-400 p-5 my-10 space-y-5">
       <Pie data={userStatusData} options={pieChartOptions} />
       <Bar data={productOrderReviewCategoryData} options={barChartOptions} />
       <Bar data={revenueData} options={revenueChartOptions} />

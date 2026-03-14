@@ -23,13 +23,11 @@ const UpdateProduct = async ({params}: UpdateProductProps) => {
   const categories = await getCategories();
 
   return (
-    <div className="my-20 flex min-h-[80vh] container mx-auto items-center justify-center">
-      <div className="w-full space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
-        <UpdateProductForm
-          product={JSON.parse(JSON.stringify(product))}
-          categories={JSON.parse(JSON.stringify(categories))}
-        />
-      </div>
+    <div className="container mx-auto my-10 space-y-4 rounded-md p-5 shadow-md dark:shadow-gray-400">
+      <UpdateProductForm
+        product={JSON.parse(JSON.stringify(product))}
+        categories={JSON.parse(JSON.stringify(categories))}
+      />
     </div>
   );
 };

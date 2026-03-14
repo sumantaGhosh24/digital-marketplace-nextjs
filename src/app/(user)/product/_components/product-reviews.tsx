@@ -18,8 +18,7 @@ const ProductReviews = ({
   emptyStateSubtext,
 }: ProductReviewsProps) => {
   return (
-    <div className="my-10 flex w-full items-center justify-center">
-      <div className="w-[95%] space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
+      <div className="container mx-auto my-10 space-y-4 rounded-md p-5 shadow-md dark:shadow-gray-400">
         <h1 className="mb-5 text-2xl font-bold">All Reviews</h1>
         {data.length > 0 ? (
           <div>
@@ -55,7 +54,6 @@ const ProductReviews = ({
           </div>
         )}
       </div>
-    </div>
   );
 };
 

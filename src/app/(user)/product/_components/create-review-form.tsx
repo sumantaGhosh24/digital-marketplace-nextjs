@@ -67,8 +67,7 @@ const CreateReviewForm = ({product, user}: AddReviewProps) => {
   };
 
   return (
-    <div className="my-10 flex w-full items-center justify-center">
-      <div className="w-[95%] space-y-4 rounded-lg p-5 shadow-lg shadow-black dark:shadow-white">
+      <div className="container mx-auto my-10 space-y-4 rounded-md p-5 shadow-md dark:shadow-gray-400">
         {user ? (
           <Form {...form}>
             <form
@@ -139,7 +138,6 @@ const CreateReviewForm = ({product, user}: AddReviewProps) => {
           </>
         )}
       </div>
-    </div>
   );
 };
 
