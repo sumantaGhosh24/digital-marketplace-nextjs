@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 interface ManageUsersProps {
-  searchParams: {[key: string]: string | string[] | undefined};
+  searchParams: Promise<{[key: string]: string | string[] | undefined}>;
 }
 
 const ManageUsers = async ({searchParams}: ManageUsersProps) => {

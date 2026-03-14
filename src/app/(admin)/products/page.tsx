@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 interface ManageProductProps {
-  searchParams: {[key: string]: string | string[] | undefined};
+  searchParams: Promise<{[key: string]: string | string[] | undefined}>;
 }
 
 const ManageProduct = async ({searchParams}: ManageProductProps) => {

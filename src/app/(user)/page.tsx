@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 interface HomeProps {
-  searchParams: {[key: string]: string | string[] | undefined};
+  searchParams: Promise<{[key: string]: string | string[] | undefined}>;
 }
 
 export default async function HomePage({searchParams}: HomeProps) {
