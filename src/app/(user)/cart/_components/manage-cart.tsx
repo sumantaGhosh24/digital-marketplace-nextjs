@@ -78,7 +78,7 @@ const ManageCart = ({cart}: ManageCartProps) => {
         <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
           <p className="text-xl font-semibold">Your cart is empty</p>
           <p className="text-gray-500">
-            Looks like you haven't added any products yet.
+            Looks like you haven&apos;t added any products yet.
           </p>
           <Button size="lg">Browse Products</Button>
         </div>

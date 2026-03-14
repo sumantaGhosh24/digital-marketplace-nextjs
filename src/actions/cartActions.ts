@@ -44,7 +44,7 @@ export async function addCart({productId, path}: AddCartParams) {
 
     let cart = await CartModel.findOne({user: user._id});
     if (cart) {
-      let productIndex = cart.products.findIndex(
+      const productIndex = cart.products.findIndex(
         (b: any) => b.product == productId
       );
 
@@ -84,7 +84,7 @@ export async function removeCart({productId, path}: RemoveCartParams) {
 
     let cart = await CartModel.findOne({user: user._id});
 
-    let productIndex = cart.products.findIndex(
+    const productIndex = cart.products.findIndex(
       (b: any) => b.product == productId
     );
 

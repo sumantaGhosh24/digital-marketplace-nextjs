@@ -25,11 +25,11 @@ const Checkout = ({cart}: CheckoutProps) => {
   const form = useForm();
 
   const calculatePrice = () => {
-    let prices: any[] = [];
+    const prices: any[] = [];
     for (let i = 0; i < cart.products.length; i++) {
       prices.push(cart.products[i].product.price);
     }
-    let price = formatFloatingNumber(prices.reduce(getSum, 0));
+    const price = formatFloatingNumber(prices.reduce(getSum, 0));
 
     return {price};
   };
@@ -38,11 +38,11 @@ const Checkout = ({cart}: CheckoutProps) => {
     setLoading(true);
 
     try {
-      let prices: any[] = [];
+      const prices: any[] = [];
       for (let i = 0; i < cart.products.length; i++) {
         prices.push(cart.products[i].product.price);
       }
-      let price = formatFloatingNumber(prices.reduce(getSum, 0));
+      const price = formatFloatingNumber(prices.reduce(getSum, 0));
 
       const orderItems: any[] = [];
       for (let i = 0; i < cart?.products?.length; i++) {
@@ -86,7 +86,8 @@ const Checkout = ({cart}: CheckoutProps) => {
           }
         },
       };
-      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
       paymentObject.on("payment.failed", function () {

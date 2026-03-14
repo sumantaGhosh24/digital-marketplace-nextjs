@@ -54,9 +54,6 @@ const AdminDashboardCharts = ({
     totalCategories,
     recentUsers,
     recentProducts,
-    recentOrders,
-    recentReviews,
-    recentCategories,
     totalRevenue,
   },
 }: DashboardDataProps) => {
